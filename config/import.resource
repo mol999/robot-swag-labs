@@ -1,29 +1,19 @@
 *** Settings ***
-Library            SeleniumLibrary
-Library            String
-Suite Setup        Open Browser  https://www.saucedemo.com/    browser=chrome   options=add_experimental_option("detach", True)
-Suite Teardown     Close Browser
-*** Variables ***
-# ${BROWSER}        chrome
-# ${URL}            https://www.saucedemo.com/
-${USERNAME}         standard_user
-${PASSWORD}         secret_sauce      
-${FIRSTNAME}        Hakuna
-${LASTNAME}         MATATA
-${ZIPCODE}          10230
+Library     SeleniumLibrary
+Library     String
 
-*** Test Cases ***
+*** Keywords ***
 Login 
+    Open Browser          https://www.saucedemo.com/     browser=chrome
+    ...    options=binary_location=r"C:\\Chrome\\chrome-win64\\chrome.exe"    #;add_experimental_option("detach", True)    
+    ...    executable_path=C:\\Chrome\\chromedriver-win64\\chromedriver-win64\\chromedriver.exe
     Maximize Browser Window                                                              #Expand window    
-    Set Selenium Speed  0.3s                                                             #กำหนดให้ทุก action 0.1 วินาที 
-    # Open Browser         ${BROWSER}  ${URL}
-    # ...    options=binary_location=r"C:\\Chrome\\chrome-win64\\chrome.exe";add_experimental_option("detach", True)    
-    # ...    executable_path=C:\\Chrome\\chromedriver-win64\\chromedriver-win64\\chromedriver.exe
-    Input Text                      id=user-name            ${username}                  #input username
-    Input Text                      id=password             ${password}                  #input password
-    Textfield Should Contain        id=user-name        ${username}                      #Verify username
+    # Set Selenium Speed  0.3s                                                             #กำหนดให้ทุก action 0.1 วินาที 
+    Input Text                      id=user-name            standard_user               #input username
+    Input Text                      id=password             secret_sauce                  #input password
+    Textfield Should Contain        id=user-name          standard_user                      #Verify username
     Page Should Contain Element     //div[@class='login_logo'][text()='Swag Labs']       #Verify the Login page is displayed 'Swag labs' 
-    Textfield Should Contain        id=password         ${password}                      #Verify assword   
+    Textfield Should Contain        id=password         secret_sauce                      #Verify assword   
     Click Button                    id=login-button                                      #click login
     Page Should Contain Element     //div//span[@class='title'][text()='Products']       #Verify the Login page is displayed 'Products'
 
@@ -47,9 +37,9 @@ Check out the product
     Click Element                   id=checkout
 
 Input information 
-    Input Text                      id=first-name           ${FIRSTNAME}
-    Input Text                      id=last-name            ${LASTNAME} 
-    Input Text                      id=postal-code          ${ZIPCODE}
+    Input Text                      id=first-name           hakuna
+    Input Text                      id=last-name            matata
+    Input Text                      id=postal-code          10230
     Click Element                   id=continue
 
 Verify the product information
@@ -92,4 +82,6 @@ Verify the product information
 # Verify complete page
     Page Should Contain Element              xpath=//h2[@class='complete-header'][text()='Thank you for your order!'] 
     Page Should Contain Button               id=back-to-products 
+
+
 
