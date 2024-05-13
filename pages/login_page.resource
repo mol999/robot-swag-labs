@@ -9,14 +9,13 @@
 
 *** Keywords ***
 Login 
-    [Arguments]     ${username}    ${password}
-    Open Browser          https://www.saucedemo.com/     browser=chrome
+    [Arguments]          ${server}       ${browser}    ${username}    ${password}
+    Open Browser         ${server}       ${browser}
     ...    options=binary_location=r"C:\\Chrome\\chrome-win64\\chrome.exe"    #;add_experimental_option("detach", True)    
     ...    executable_path=C:\\Chrome\\chromedriver-win64\\chromedriver-win64\\chromedriver.exe
     Maximize Browser Window                                                                                     #Expand window    
-    # Set Selenium Speed  0.3s                                                                                  #กำหนดให้ทุก action 0.1 วินาที 
-    # Input Text                      ${dict_login_page}[input_username]            standard_user               #input username
-     Input Text                     ${dict_login_page}[input_username]           ${username}                    #input username
+    Set Selenium Speed  0.3s                                                                                  #กำหนดให้ทุก action 0.1 วินาที 
+    Input Text                      ${dict_login_page}[input_username]           ${username}                    #input username
     Input Text                      ${dict_login_page}[input_password]           ${password}                    #input password
     Textfield Should Contain        ${dict_login_page}[input_username]           ${username}                    #Verify username
     Page Should Contain Element     ${dict_login_page}[login_logo]                                              #Verify the Login page is displayed 'Swag labs'

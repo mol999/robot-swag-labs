@@ -1,11 +1,12 @@
 *** Settings ***
-Resource    ${CURDIR}/../config/import.resource
+Test Setup        BuiltIn.Set library search order    SeleniumLibrary                                                         
+Resource   ${CURDIR}/../config/import.resource
+
 
 *** Test Cases ***
 
 E2E_Buy_product_success
-    # Log    Helloworld
-    Login                                   ${TC_001.user_name}      ${TC_001.pwd}
+    Login                                   ${TC_001.server}   ${TC_001.browser}   ${TC_001.user_name}      ${TC_001.pwd}
     Filter the product
     Add the product to the cart
     Check out the product 
