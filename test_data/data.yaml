@@ -8,7 +8,6 @@ TC_001:
   # information:
     first_name: hakuna
     last_name:  matata
-    zip:  11000
 TC_002:
   # user:
     user_name:  standard_user
