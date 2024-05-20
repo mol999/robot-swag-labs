@@ -5,7 +5,6 @@
 ...    filter_option=xpath=//div//select[@class='product_sort_container']
 
 *** Keywords ***
-
 Filter the product
     Click Element                       ${dict_home_page}[filter_buton]
     # Select From List By Index         xpath=//div//select[@class='product_sort_container']    3  #เลือกเป๋นลำดับของ Index
